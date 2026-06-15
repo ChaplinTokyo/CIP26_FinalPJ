@@ -26,7 +26,7 @@ def main():
     print("***********************************************************************************")
     print("*        DOCUMENT SANITIZER  - anonymize documents before feeding to LLMs         *")
     print("***********************************************************************************")
-    print("This programme finds and removes personal information from text files such as contracts.")
+    print("This programme finds and removes personal information from markdown files such as contracts.")
     print("")
     file_name = input("Name of the file to open (or hit return to open 'sample_literaryoption_contract.md'): ") or "sample_literaryoption_contract.md"
     open_file_and_print(file_name)
