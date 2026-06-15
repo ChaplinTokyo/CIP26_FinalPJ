@@ -49,7 +49,7 @@ def main():
             out_file.write(line)
             print(line, end='') # end='' prevents double newlines since line already has '\n'
     print("<<<<<<<<<<<<<<<<<< end of sanitized document >>>>>>>>>>>>>>>>>>")
-    print(f"Output file size: {os.path.getsize('redacted_result.md')} bytes")      # check whether anything was written to file
+    print(f"(Output file size: {os.path.getsize('redacted_result.md')} bytes)")      # check whether anything was written to file
     print("")
     print("")
     print("- Sanitized file has been written to disk as 'redacted_result.md'")
