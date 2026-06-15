@@ -31,7 +31,7 @@ def main():
     print("")
     print("")
     print("- Find and remove sensitive information from plain text and markdown files (example: contracts).")
-    print("- Just to be on the safe side, anonymize documents before you feed them to LLMs.")
+    print("- Just to be on the safe side, why not anonymize documents before you feed them to LLMs?")
     print("")
     print("")
     print("")
@@ -55,6 +55,7 @@ def main():
     print("- Sanitized file has been written to disk as 'redacted_result.md'")
     print("- Sanitization word pairs saved to disk as 'word_pairs.json'")  # let user know that the word pairs have been written to disk
     print("")
+    print("END OF RUN")
 
 # helper function to ask user to input key:value pairs for strings needing to be anonymized, with the placeholders to use
 def input_anonymization_pairs():
@@ -65,8 +66,8 @@ def input_anonymization_pairs():
     print("")
     print("Your file has been printed to Terminal.")
     print("")
-    print("Input your 'find and replace' word pairs by copying & pasting or typing them in. ")
-    print("If document is long, you will find it much easier to open it up in a separate editor screen since you can copy & paste the strings between two open windows.")
+    print("Input your 'find and replace' word pairs below, by copying & pasting or typing them in. ")
+    print("If document is long, you will find it much easier to open it up in a separate editor screen (copy & paste with 2 windows open!)")
     print("")
     while True:
         key = input("Type or paste strings you want to replace ('q' to finish): ")
