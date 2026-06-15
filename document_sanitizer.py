@@ -43,6 +43,7 @@ def main():
             print(line, end='') # end='' prevents double newlines since line already has '\n'
     print(f"Output file size: {os.path.getsize('redacted_result.md')} bytes")      # check whether anything was written to file
     print("")
+    print("Sanitized file has been written to disk as 'redacted_result.md'')
     print("Sanitization word pairs saved to disk as 'word_pairs.json'")  # let user know that the word pairs have been written to disk
     print("")
 
