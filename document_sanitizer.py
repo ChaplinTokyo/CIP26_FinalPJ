@@ -16,6 +16,7 @@ summarization by LLM chatbot.
 MILESTONE 1: start with a text file anonymizer, rather than an MS-Word one
 (MILESTONE 2: Add function to repopulate the processed file with redacted strings returned to placeholders)
 """
+import json
 import os
 print(f"Working directory: {os.getcwd()}")
 
@@ -27,20 +28,23 @@ def main():
     print("***********************************************************************************")
     print("This programme finds and removes personal information from text files such as contracts.")
     print("")
-    file_name = input("Name of the file to open (or hit return to open 'sample_literaryoption_contract.txt'): ") or "sample_literaryoption_contract.txt"
+    file_name = input("Name of the file to open (or hit return to open 'sample_literaryoption_contract.md'): ") or "sample_literaryoption_contract.md"
     open_file_and_print(file_name)
     word_pairs = input_anonymization_pairs()
     print(word_pairs)
 
     # replace words in line using key and value in word_pairs
-    with open(file_name, "r") as in_file, open("redacted_result.txt", "w") as out_file:
+    with open(file_name, "r") as in_file, open("redacted_result.md", "w") as out_file:
         print(f"About to open: '{file_name}' | Length: {len(file_name)} | Repr: {repr(file_name)}") # test command to see whether files are being opened correctly
         for line in in_file:
             for o_word, n_word in word_pairs.items():
                 line = line.replace(o_word, n_word)
             out_file.write(line)
             print(line, end='') # end='' prevents double newlines since line already has '\n'
-    print(f"Output file size: {os.path.getsize('redacted_result.txt')} bytes")      # check whether anything was written to file
+    print(f"Output file size: {os.path.getsize('redacted_result.md')} bytes")      # check whether anything was written to file
+    print("")
+    print("Sanitization word pairs saved to disk as 'word_pairs.json'")  # let user know that the word pairs have been written to disk
+    print("")
 
 # helper function to ask user to input key:value pairs for strings needing to be anonymized, with the placeholders to use
 def input_anonymization_pairs():
@@ -48,7 +52,7 @@ def input_anonymization_pairs():
 # instruct user to maximize the terminal to be able to see the contract that needs to be redacted
     print("Your file has been printed to Terminal. Maximize the Terminal and scroll up.")
     print("Answer questions below by copying & pasting the strings you want to redact. ")
-    print("If document is large, open it up in a separate editor window so you can scroll more easily.")
+    print("For large documents, open it up in a separate editor so you scrolling through the document is easier.")
     print("")
     while True:
         key = input("Paste string you want to replace ('q' to quit): ")
@@ -58,6 +62,9 @@ def input_anonymization_pairs():
 
         value = input(f"Enter the placeholder for '{key}': ")
         word_pairs[key] = value
+        # save word pairs to json
+        with open("word_pairs.json", "w") as f:
+            json.dump(word_pairs, f)
     return word_pairs
 
 
