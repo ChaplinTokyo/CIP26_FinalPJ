@@ -16,19 +16,26 @@ summarization by LLM chatbot.
 MILESTONE 1: start with a text file anonymizer, rather than an MS-Word one
 (MILESTONE 2: Add function to repopulate the processed file with redacted strings returned to placeholders)
 """
+
 import json
 import os
 print(f"Working directory: {os.getcwd()}")
 
 def main():
     # prompt file name from user and read it in and print to terminal so user can identify parts to anonymize
-    print()
-    print("***********************************************************************************")
-    print("*        DOCUMENT SANITIZER  - anonymize documents before feeding to LLMs         *")
-    print("***********************************************************************************")
-    print("This programme finds and removes personal information from markdown files such as contracts.")
     print("")
-    file_name = input("Name of the file to open (or hit return to open 'sample_literaryoption_contract.md'): ") or "sample_literaryoption_contract.md"
+    print("")
+    print("**********************************")
+    print("*       DOCUMENT SANITIZER       *")
+    print("**********************************")
+    print("")
+    print("")
+    print("- Find and remove sensitive information from plain text and markdown files (example: contracts).")
+    print("- Just to be on the safe side, anonymize documents before you feed them to LLMs.")
+    print("")
+    print("")
+    print("")
+    file_name = input("Enter name of the file to open (or hit return to open 'sample_literaryoption_contract.md'): ") or "sample_literaryoption_contract.md"
     open_file_and_print(file_name)
     word_pairs = input_anonymization_pairs()
     print(word_pairs)
@@ -41,22 +48,28 @@ def main():
                 line = line.replace(o_word, n_word)
             out_file.write(line)
             print(line, end='') # end='' prevents double newlines since line already has '\n'
+    print("<<<<<<<<<<<<<<<<<< end of sanitized document >>>>>>>>>>>>>>>>>>")
     print(f"Output file size: {os.path.getsize('redacted_result.md')} bytes")      # check whether anything was written to file
     print("")
-    print("Sanitized file has been written to disk as 'redacted_result.md'')
-    print("Sanitization word pairs saved to disk as 'word_pairs.json'")  # let user know that the word pairs have been written to disk
+    print("")
+    print("- Sanitized file has been written to disk as 'redacted_result.md'")
+    print("- Sanitization word pairs saved to disk as 'word_pairs.json'")  # let user know that the word pairs have been written to disk
     print("")
 
 # helper function to ask user to input key:value pairs for strings needing to be anonymized, with the placeholders to use
 def input_anonymization_pairs():
     word_pairs = {}
 # instruct user to maximize the terminal to be able to see the contract that needs to be redacted
-    print("Your file has been printed to Terminal. Maximize the Terminal and scroll up.")
-    print("Answer questions below by copying & pasting the strings you want to redact. ")
-    print("For large documents, open it up in a separate editor so you scrolling through the document is easier.")
+    print("<<<<<<<<<<<<<<<<<<<<<< end of document >>>>>>>>>>>>>>>>>>>>>>")
+    print("")
+    print("")
+    print("Your file has been printed to Terminal.")
+    print("")
+    print("Input your 'find and replace' word pairs by copying & pasting or typing them in. ")
+    print("If document is long, you will find it much easier to open it up in a separate editor screen since you can copy & paste the strings between two open windows.")
     print("")
     while True:
-        key = input("Paste string you want to replace ('q' to quit): ")
+        key = input("Type or paste strings you want to replace ('q' to finish): ")
 
         if key.lower() == 'q':
             break
